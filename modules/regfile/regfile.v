@@ -20,6 +20,10 @@ module regfile(
 
 reg [31:0] regs[1:31];
 
+initial begin
+    regs[2] <= 32'h7cc;
+end
+
 // read
 always @(posedge clk) begin
     if (r1_reg_name == 5'b0)
@@ -36,8 +40,9 @@ end
 // write
 always @(posedge clk) begin
     if (w_enable)
-        if (w_reg_name != 5'b0)
+        if (w_reg_name != 5'b0) begin
             regs[w_reg_name] <= w_reg_val;
+        end
 end
 
 endmodule

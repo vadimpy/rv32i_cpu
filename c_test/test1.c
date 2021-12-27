@@ -18,13 +18,16 @@ int mul(int a, int b) {
 }
 
 void print(unsigned a) {
-    *(unsigned*)0x7000 = a;
+    *(unsigned*)0x0 = a;
 }
 
 void _start() {
     int x = 16;
     int y = 5;
+    int z = x + y;
+    print(z);
+    /*
     int z = mul(x, y);
     div_res_t p = div(x, y);
-    print(p.mod);
+    print(p.mod);*/
 }

@@ -1,8 +1,8 @@
-// mem_tb.v
+// ram_tb.v
 
 `timescale 1 ns/10 ps
 
-module mem_tb;
+module ram_tb;
 
 reg clk = 0;
 always #5 clk <= ~clk;
@@ -18,7 +18,7 @@ reg [29:0] w_addr;
 reg [31:0] w_val;
 reg [3:0] byte_en;
 
-mem mem(
+ram ram(
     clk,
     r1_addr,
     r1_val,
