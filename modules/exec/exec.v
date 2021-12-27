@@ -120,7 +120,7 @@ always @(posedge clk) begin
             endcase
         end
         `L_TYPE: begin
-            load_hazard <= 3;
+            load_hazard <= 2;
             pc_redirect_valid <= 0;
             next_stage_val <= w_alu_res;
             ex_bp_reg <= 0;

@@ -19,7 +19,7 @@ module ram(
     input wire [3:0] byte_en
 );
 
-reg [31:0] data [0 : 294];
+reg [31:0] data [0 : 499];
 
 integer i;
 

@@ -25,12 +25,12 @@ initial begin
 end
 
 // read
-always @(posedge clk) begin
+always @(*) begin
     if (r1_reg_name == 5'b0)
         r1_reg_val <= 32'b0;
     else
         r1_reg_val <= regs[r1_reg_name];
-    
+
     if (r2_reg_name == 5'b0)
         r2_reg_val <= 32'b0;
     else
@@ -38,7 +38,7 @@ always @(posedge clk) begin
 end
 
 // write
-always @(posedge clk) begin
+always @(negedge clk) begin
     if (w_enable)
         if (w_reg_name != 5'b0) begin
             regs[w_reg_name] <= w_reg_val;
