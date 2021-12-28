@@ -10,6 +10,8 @@ always #5 clk <= ~clk;
 top soc(clk);
 
 initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0,run);
     #600
     $finish;
 end

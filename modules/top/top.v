@@ -50,7 +50,7 @@ wire [31:0] insn;
 wire [31:0] pc_de;
 
 
-fetch #(32'h140) fetch (
+fetch #(32'h34) fetch (
     clk,
     ex_pc_offset,
     ex_pc_base,

@@ -16,8 +16,6 @@ reg [31:0] pc;
 reg [31:0] pc_prev;
 reg [31:0] prev_insn;
 
-
-
 assign mem_addr = pc[31:2];
 
 initial begin
@@ -41,7 +39,6 @@ always @(posedge clk) begin
         pc_de <= pc_prev;
 
         if (pc_ex_valid) begin
-            $display("from exec: %h %h", pc_ex_base, pc_ex_off);
             pc <= pc_ex_base + pc_ex_off;
         end
         else begin

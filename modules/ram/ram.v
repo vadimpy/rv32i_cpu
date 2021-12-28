@@ -25,7 +25,7 @@ integer i;
 
 initial begin
     $display("Loading ELF...");
-    $readmemh("/Users/vadimpy/dev/hard/rv32i_cpu/c_test/test1.hex", data);
+    $readmemh("/Users/vadimpy/dev/hard/rv32i_cpu/c_test/simple.hex", data);
     $display("ELF was loaded");
 end
 

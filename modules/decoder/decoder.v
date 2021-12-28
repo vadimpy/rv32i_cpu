@@ -9,8 +9,8 @@ module decoder(
     input wire  [31:0] insn,
     input wire  [31:0] pc,
     input wire         ex_stall,
-    output wire [4:0]  rs1,
-    output wire [4:0]  rs2,
+    output reg  [4:0]  rs1,
+    output reg  [4:0]  rs2,
     output reg  [4:0]  rd,
     output reg  [3:0]  alu_code, // ensure width
     output reg  [31:0] pc_de,
@@ -40,8 +40,6 @@ wire [4:0] w_rd;
 assign opcode = insn[6:0];
 assign funct3 = insn[14:12];
 assign funct7 = insn[31:25];
-assign rs1 = insn[19:15];
-assign rs2 = insn[24:20];
 assign w_rd = insn[11:7];
 assign ecall_ebreak_field = insn[31:7];
 
@@ -55,8 +53,10 @@ assign shamt = { 27'b0, insn[24:20] };
 always @(posedge clk) begin
     if (~ex_stall) begin
         pc_de <= pc;
-        rs1_reg <= rs1;
-        rs2_reg <= rs2;
+        rs1_reg <= insn[19:15];
+        rs2_reg <= insn[24:20];
+        rs1 <= insn[19:15];
+        rs2 <= insn[24:20];
     end
 end
 
@@ -153,6 +153,7 @@ always @(posedge clk) begin
             `LOAD_OPCODE: begin
                 insn_type = `L_TYPE;
                 rd <= w_rd;
+                alu_code <= `ADD;
                 imm <= i_imm;
                 case (funct3)
                     `LB_FUNCT3: begin
@@ -184,6 +185,7 @@ always @(posedge clk) begin
                 insn_type <= `S_TYPE;
                 rd <= 0;
                 imm <= s_imm;
+                alu_code <= `ADD;
                 case (funct3)
                     `SB_FUNCT3: begin
                         $display("%h sb %d %h(%d)", pc, rs2, i_imm, rs1);
