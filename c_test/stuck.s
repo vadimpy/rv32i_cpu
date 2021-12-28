@@ -1,0 +1,2 @@
+sym:
+jal zero, sym

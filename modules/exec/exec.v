@@ -80,10 +80,12 @@ always @(posedge clk) begin
     if (~ex_stall) begin
         insn_type_r <= insn_type;
         insn_sub_type_r <= insn_sub_type;
-        if (pc_de === next_valid_pc) begin
+
+        if ((insn_type !== `DB_TYPE) & (insn_type !== `IB_TYPE) & (pc_de === next_valid_pc)) begin
             wait_for_pc <= 0;
             next_valid_pc <= 0;
         end
+
     end
     else
         load_hazard <= load_hazard - 1;
@@ -94,7 +96,7 @@ always @(posedge clk) begin
         pc_redirect_valid <= 0;
     end
 
-    if ((~wait_for_pc | awaited_pc_valid) & ~ex_stall) begin
+    if ((wait_for_pc === 1'b0) | (awaited_pc_valid === 1'b1) & (ex_stall === 1'b0)) begin
     case (insn_type)
         `AR_TYPE: begin
             load_hazard <= 0;

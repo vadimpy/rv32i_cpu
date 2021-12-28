@@ -19,13 +19,13 @@ module ram(
     input wire [3:0] byte_en
 );
 
-reg [31:0] data [0 : 499];
+reg [31:0] data [0 : 500];
 
 integer i;
 
 initial begin
     $display("Loading ELF...");
-    $readmemh("/Users/vadimpy/dev/hard/rv32i_cpu/c_test/simple.hex", data);
+    $readmemh("/Users/vadimpy/dev/hard/rv32i_cpu/c_test/stuck.hex", data);
     $display("ELF was loaded");
 end
 
